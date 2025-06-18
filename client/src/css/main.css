@@ -1,0 +1,43 @@
+:root{
+    --color-price:#4874b5;
+     --color-btn:#1a51a2;
+     --color-white:#fff;
+    --color-danger:#c80036;
+    --color-grey:#5c5c5e;
+    --color-grey-light:#dcdcdc;
+    --color-black:#000;
+}
+html{
+    font-family: "Inter", sans-serif;
+}
+a {
+    text-decoration: none;
+}
+.btn-primary{
+    background: var(--color-btn);
+    border: none;
+}
+.btn-primary {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.btn-cancle{
+    background: var(--color-danger);
+    color: var(--color-white);
+}
+.logo-img {
+    max-width: 200px;
+}
+.page-wrapper {
+    min-height: 100vh;
+}
+.rounded-sm {
+ border-radius: 4px;
+}
+.rounded-md {
+ border-radius: 5px;
+}
+.shadow-md{
+ box-shadow: rgba(0,0,0,0.15) 0 2px 8px;
+}
