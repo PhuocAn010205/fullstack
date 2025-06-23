@@ -30,8 +30,6 @@ const handleLogin = function(event){
             expiry:new Date().getTime() + 2*60*60*1000 // 2hours
         };
         localStorage.setItem('user_session',JSON.stringify(userSession));
-        // regMessage.innerText="Đăng nhập thành công ^.^."
-        // regMessage.style.color="green";
         window.location.href='index.html';
     })
     .catch(e =>{

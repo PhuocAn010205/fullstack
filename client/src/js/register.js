@@ -55,8 +55,7 @@ const handleRegister = function (event) {
 
        return;
   } 
-    // ✅ Mã hóa mật khẩu
-    const hashedPwd = bcrypt.hashSync(password, 10);
+   
    createUserWithEmailAndPassword(auth,email,password).then((userCredential)=> {
     const user = userCredential.user;
     const userData = {

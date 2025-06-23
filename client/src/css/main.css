@@ -9,6 +9,12 @@
 }
 html{
     font-family: "Inter", sans-serif;
+    
+}
+.container {
+    width: 1170px;
+    max-width: calc(1170 - 48px);/*Khi chieu dai cua trang web nho hon 1170 thi giup cho trang le trai va phai co kc 24px*/
+    margin: 0 auto;/*can giua*/
 }
 a {
     text-decoration: none;
