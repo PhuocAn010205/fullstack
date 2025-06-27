@@ -1,0 +1,30 @@
+.product-detail{
+    margin-top: 30px;
+}
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+.breadcrumb li {
+  padding: 5px 0;
+}
+.breadcrumb li:nth-child(2){
+    margin-left: 6px;
+}
+.breadcrumb li a {
+    font-size: 1.5rem;
+    color:#999;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.breadcrumb li a:hover{
+    color: var(--color-black);
+}
+.breadcrumb span {
+    margin-left: 3px;
+    font-weight: 300;
+    font-size: 1.5rem;
+    color:#999;
+
+}
