@@ -29,7 +29,6 @@ a {
 }
 
 .btn-cancle{
-    background: var(--color-danger);
     color: var(--color-white);
 }
 .logo-img {
