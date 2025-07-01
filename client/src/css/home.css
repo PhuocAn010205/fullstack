@@ -420,7 +420,7 @@ main {
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #333;
+  color: var(--color-black);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   /*Dùng để giới hạn dòng chạy nên vượt quá thì sẽ ra dấu 3 chấm*/
@@ -626,4 +626,210 @@ button.disabled {
     padding: 20px 0;
   }
 
+}
+/* Phần mega menu khi hover vào  */
+    /* .menu-container {
+      position: relative;
+      display: inline-block;
+    } */
+
+    /* .menu-trigger {
+      background-color: #007aff;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    } */
+
+    /* .mega-menu {
+      display: none;
+
+      position: absolute;
+      top: 44px;
+      left: 0;
+      background: white;
+      width: 800px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 999;
+      gap: 40px;
+      border-radius: 8px;
+    } */
+    /* làm cầu nối  */
+    /* .mega-menu::before{
+    position: absolute;
+    content: "";
+    background: transparent;
+    width: 10px;
+    height: 10px;
+    top: -6px;
+    padding: 20px;
+    } */
+
+    /* .menu-container:hover .mega-menu {
+      display: block;
+    } */
+/* 
+    .menu-column {
+      display: flex;
+      gap: 30px;
+    }
+
+    .menu-column h4 {
+      font-size: 18px;
+      color: #007aff;
+      margin-bottom: 10px;
+    }
+
+    .menu-column ul {
+      display: flex;
+      border-left: 2px solid var(--color-price);
+      margin-left: 20px;
+      padding-left: 10px;
+      align-items: center;
+    }
+
+    .menu-column li {
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .menu-column li:hover {
+      background-color: #f0f0f0;
+    } */
+    /* danh sach san pham */
+  .header {
+    padding: 5px;
+    background:#f7f7f7;
+    margin-bottom: 10px;
+  }
+    /* home filter */
+  .home-filter{
+ display: flex;
+ align-items: center;
+ padding: 10px ;
+}
+.home-filter__label{
+  font-size: 2rem;
+  color:var(--color-black);
+  margin-right: 16px;
+  font-weight: 400;
+}
+.home-filter__btn{
+    margin-right: 12px;
+    width: 162px;
+    background: var(--color-white);
+    color: var(--color-btn);
+    outline: 1px solid var(--color-btn);
+    transition: color 0.3s ease;
+}
+.home-filter__btn:hover{
+  color: var(--color-black);
+  outline: none;
+}
+/* pro__list-item */
+  .pro__list-item {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin: 15px -5px 0 -5px;
+  }
+  .pro__list-item article {
+     margin-left: 5px;
+    margin-right: 5px;
+    width: 18%;
+  }
+  .pro__list-item article h4 {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+  .home-product {
+    padding-bottom: 60px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  /* them vao gio hang */
+  .header_cart-wrap:hover .header__cart-list{
+    display: block;
+}
+
+.header__cart-list {
+  position: absolute;
+    right: 96px;
+    background-color: white;
+    width: 400px;
+    border-radius: 2px;
+    box-shadow: 0 1px 3.125rem 0 rgba(0, 0, 0, 0.2);
+    top: calc(100% + 4px);
+    display: none;
+    animation: fadeIn ease-in 0.2s;
+    cursor: default;
+    z-index: 1;
+    top: 42px;
+        padding: 15px 10px;
+    
+}
+.header_cart-wrap{
+    position: relative;
+    display: inline-block;
+    padding: 0 12px;
+    cursor: pointer;
+    
+}
+.header__cart-list::after{
+       content: "";
+    position: absolute;
+    top: -17px;
+    border-width: 13px 13px;
+    border-style: solid;
+    border-color: transparent transparent white transparent;
+    cursor: pointer;
+    right: 1px;
+}
+.header__cart-no-cart-img{
+    width: 40%;
+    display: none;
+
+}
+.header__cart-list--no-cart {
+    padding: 24px 0;
+}
+.header__cart-list--no-cart .header__cart-no-cart-img,
+.header__cart-list--no-cart .header__cart-no-cart-msg{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.header__cart-icon {
+    color: var(--white-color);
+    font-size:3.6rem;
+
+}
+.header__cart-no-cart-msg {
+    display: none;
+    font-size: 1.6rem;
+    margin-top: 14px;
+    color: var(--text-color);
+}
+.header__cart-heading {
+    margin-top: 10px;
+ margin-left: 10px;
+ font-size: 1.5rem;
+ color: #4874b5;
+}
+.header-cart-item{
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr;
+    align-items: center;
+}
+.header__cart-list-item {
+    margin-top: 15px;
+}
+.header__cart-list-item {
+    padding-left: 0;
+    list-style: none;
+    height: 56vh;
+    overflow-y: auto;
 }

@@ -20,6 +20,7 @@
   <!-- css dung chung -->
   <link rel="stylesheet" href="./src/css/reset.css">
   <link rel="stylesheet" href="./src/css/home.css">
+  <link rel="stylesheet" href="./src/css/product.css">
   <!-- <link rel="stylesheet" href="./src/css/main.css"> -->
   <!-- favicon -->
   <link rel="shortcut icon" href="./src/img/uthcare.png" type="image/x-icon">
@@ -155,7 +156,7 @@
       </div>
       <nav class="main-menu">
         <ul class="menu-list">
-          <li><a href="danhsach.html">Thuốc</a></li>
+          <li><a href="#">Thuốc</a></li>
           <li><a href="#">Thực phẩm bảo vệ sức khỏe</a></li>
           <li><a href="#">Dinh dưỡng – Thể hình</a></li>
           <li>
@@ -170,52 +171,39 @@
   </div>
 </header>
 <!-- main -->
-<main>
-  <section class="page__banner">
+<main style="background-color: transparent;">
+    <section class="header">
     <div class="container">
-      <figure class="inner__banner">
-        <div class="banner__carousel">
-          <div class="img__silde">
-            <!-- banner1 -->
-            <div class="img__item">
-              <img src="./src/img/banner1.webp" alt="banner1">
-            </div>
-            <!-- banner 2 -->
-            <div class="img__item">
-              <img src="./src/img/banner2.webp" alt="banner2">
-            </div>
-            <!-- banner 3 -->
-            <div class="img__item">
-              <img src="./src/img/banner3.png" alt="banner3">
-            </div>
-            <!-- banner 4 -->
-            <div class="img__item">
-              <img src="./src/img/banner4.webp" alt="banner4">
-            </div>
-            <!-- banner 5 -->
-            <div class="img__item">
-              <img src="./src/img/banner5.webp" alt="banner5">
-            </div>
-          </div>
+           <div class="row-grid-top">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="home.html">Trang chủ</a>
+                    <span>></span>
+                </li>
+                <li>
+                    <p>Thuốc</p>
+                </li>
+            </ul>
         </div>
-        <div class="navigation">
-          <button class="arrow-left"><i class="fa-solid fa-angle-left"></i></i></button>
-          <button class="arrow-right"><i class="fa-solid fa-angle-right"></i></button>
-        </div>
-        <div class="banner-indicators"></div>
-      </figure>
     </div>
-  </section>
+    </section>
+
   <!-- Featured products -->
-  <section class="products">
+  <section class="products" style="background: var(--color-white);">
 
     <div class="container">
-      <h2 class="section__heading">Sản phẩm bán chạy </h2>
-      <div class="pro_best">
-         <div class="pro__wrapper">
-           <div class="pro__track">
-        <!-- page 1 -->
-        <div class="pro__list">
+       
+      <div class="pro_best home-product ">
+        <!--  -->
+        <div class="home-filter">
+                  <span class="home-filter__label">Sắp xếp theo </span>
+                  <button class="home-filter__btn btn">Giá giảm dần</button>
+                  <button class="home-filter__btn btn">Giá tăng dần</button>
+                  
+           </div>
+               <!--  -->
+        <div class="pro__list pro__list-item">
+            <!-- product item 1 -->
           <article class="product__item">
             <div class="product__tag product__tag--new">Mới</div>
             <img src="./src/img/anhproduct1.webp" alt="Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN" class="img__product">
@@ -226,6 +214,7 @@
             </div>
             <button class="btn" onclick="location.href='product.html'" > Chọn</button>
           </article>
+            <!-- product item 2 -->
 
           <article class="product__item">
             <div class="product__tag product__tag--discount">Giảm 20%</div>
@@ -238,6 +227,7 @@
             </div>
             <button class="btn">Chọn</button>
           </article>
+            <!-- product item 3 -->
 
           <article class="product__item">
             <div class="product__tag product__tag--promo">Mua 1 Tặng 1</div>
@@ -249,6 +239,7 @@
             </div>
             <button class="btn">Chọn</button>
           </article>
+            <!-- product item 4 -->
 
           <article class="product__item">
             <div class="product__tag product__tag--discount">Giảm 30%</div>
@@ -262,6 +253,59 @@
             </div>
             <button class="btn">Chọn</button>
           </article>
+            <!-- product item 5 -->
+
+          <article class="product__item">
+            <div class="product__tag product__tag--new">Mới</div>
+            <img src="./src/img/anhproduct1.webp" alt="Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN" class="img__product">
+            <div class="content__product">
+              <h4 class="title__product">Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN (Hộp 60 viên)</h4>
+              <span class="product__price-new">4.950.000 ₫/Hộp</span>
+              <span class="status__product selling">Đang bán chạy</span>
+            </div>
+            <button class="btn">Chọn</button>
+          </article>
+            <!-- product item 6 -->
+
+          <article class="product__item">
+            <div class="product__tag product__tag--discount">Giảm 20%</div>
+            <img src="./src/img/anhproduct1.webp" alt="Nước uống collagen Elasten 2500mg" class="img__product">
+            <div class="content__product">
+              <h4 class="title__product">Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN (Hộp 60 viên)</h4>
+              <span class="product__price-old">2.500.000 ₫</span>
+              <span class="product__price-new">2.000.000 ₫/Hộp</span>
+              <span class="status__product selling">Đang bán chạy</span>
+            </div>
+            <button class="btn">Chọn</button>
+          </article>
+            <!-- product item 7 -->
+
+          <article class="product__item">
+            <div class="product__tag product__tag--promo">Mua 1 Tặng 1</div>
+            <img src="./src/img/anhproduct1.webp" alt="Viên sủi Pharmacity Energy Boost" class="img__product">
+            <div class="content__product">
+              <h4 class="title__product">Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN (Hộp 60 viên)</h4>
+              <span class="product__price-new">75.000 ₫/Tuýp</span>
+              <span class="status__product selling">Đang bán chạy</span>
+            </div>
+            <button class="btn">Chọn</button>
+          </article>
+            <!-- product item 8 -->
+
+          <article class="product__item">
+            <div class="product__tag product__tag--discount">Giảm 30%</div>
+            <img src="./src/img/anhproduct1.webp" alt="Kem chống nắng LA ROCHE POSAY Anthelios XL SPF 50+"
+              class="img__product">
+            <div class="content__product">
+              <h4 class="title__product">Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN (Hộp 60 viên)</h4>
+              <span class="product__price-old">560.000 ₫</span>
+              <span class="product__price-new">392.000 ₫/Chai</span>
+              <span class="status__product selling">Đang bán chạy</span>
+            </div>
+            <button class="btn">Chọn</button>
+          </article>
+          
+            <!-- product item 9 -->
 
           <article class="product__item">
             <div class="product__tag product__tag--promo">Mua 1 Tặng 1</div>
@@ -273,6 +317,7 @@
             </div>
             <button class="btn">Chọn</button>
           </article>
+            <!-- product item 10 -->
 
           <article class="product__item">
             <div class="product__tag product__tag--discount">Giảm 87.000đ</div>
@@ -285,9 +330,72 @@
             </div>
             <button class="btn">Chọn</button>
           </article>
+            <!-- product item 11-->
+
+             <article class="product__item">
+            <div class="product__tag product__tag--new">Mới</div>
+            <img src="./src/img/anhproduct1.webp" alt="Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN" class="img__product">
+            <div class="content__product">
+              <h4 class="title__product">Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN (Hộp 60 viên)</h4>
+              <span class="product__price-new">3.950.000 ₫/Hộp</span>
+              <span class="status__product selling">Đang bán chạy</span>
+            </div>
+            <button class="btn" onclick="location.href='product.html'" > Chọn</button>
+          </article>
+            <!-- product item 12-->
+
+          <article class="product__item">
+            <div class="product__tag product__tag--discount">Giảm 20%</div>
+            <img src="./src/img/anhproduct1.webp" alt="Nước uống collagen Elasten 2500mg" class="img__product">
+            <div class="content__product">
+              <h4 class="title__product">Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN (Hộp 60 viên)</h4>
+              <span class="product__price-old">2.000.000 ₫</span>
+              <span class="product__price-new">1.600.000 ₫/Hộp</span>
+              <span class="status__product selling">Đang bán chạy</span>
+            </div>
+            <button class="btn">Chọn</button>
+          </article>
+            <!-- product item 13-->
+
+          <article class="product__item">
+            <div class="product__tag product__tag--promo">Mua 1 Tặng 1</div>
+            <img src="./src/img/anhproduct1.webp" alt="Viên sủi Pharmacity Energy Boost" class="img__product">
+            <div class="content__product">
+              <h4 class="title__product">Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN (Hộp 60 viên)</h4>
+              <span class="product__price-new">75.000 ₫/Tuýp</span>
+              <span class="status__product selling">Đang bán chạy</span>
+            </div>
+            <button class="btn">Chọn</button>
+          </article>
+            <!-- product item 14-->
+
+          <article class="product__item">
+            <div class="product__tag product__tag--discount">Giảm 30%</div>
+            <img src="./src/img/anhproduct1.webp" alt="Kem chống nắng LA ROCHE POSAY Anthelios XL SPF 50+"
+              class="img__product">
+            <div class="content__product">
+              <h4 class="title__product">Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN (Hộp 60 viên)</h4>
+              <span class="product__price-old">600.000 ₫</span>
+              <span class="product__price-new">392.000 ₫/Chai</span>
+              <span class="status__product selling">Đang bán chạy</span>
+            </div>
+            <button class="btn">Chọn</button>
+          </article>
+            <!-- product item 15-->
+
+          <article class="product__item">
+            <div class="product__tag product__tag--new">Mới</div>
+            <img src="./src/img/anhproduct1.webp" alt="Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN" class="img__product">
+            <div class="content__product">
+              <h4 class="title__product">Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN (Hộp 60 viên)</h4>
+              <span class="product__price-new">4.950.000 ₫/Hộp</span>
+              <span class="status__product selling">Đang bán chạy</span>
+            </div>
+            <button class="btn">Chọn</button>
+          </article>
         </div>
         <!-- page 2 -->
-          <div class="pro__list">
+          <!-- <div class="pro__list pro__list-page">
           <article class="product__item">
             <div class="product__tag product__tag--new">Mới</div>
             <img src="./src/img/anhproduct1.webp" alt="Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN" class="img__product">
@@ -357,14 +465,15 @@
             </div>
             <button class="btn">Chọn</button>
           </article>
-        </div>
-        </div>
-        </div>
-          <div class="navigation">
-          <button class="arrow-left disabled"><i class="fa-solid fa-angle-left"></i></i></button>
-          <button class="arrow-right"><i class="fa-solid fa-angle-right"></i></button>
-        </div>
+        </div> -->
+
+    <button class="btn home-filter__btn" style="
+    position: absolute;
+    right: 50%;
+    transform: translateX(50%); margin-top: 10px;">Xem Thêm</button>
+
       </div>
+
     </div>
 
 
