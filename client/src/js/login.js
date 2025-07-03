@@ -17,24 +17,24 @@ const handleLogin = function(event){
         return;
     }
     // hàm bất đồng bộ người then để trả về dl 
-    signInWithEmailAndPassword(auth,email,password)
-    .then((userCredential)=>{
-        const user = userCredential.user;
-        // usersession kiểu dữ liệu là đối tượng nên 
-        // phải dùng JSON.stringify(vale); để thành chuỗi json; 
+    // signInWithEmailAndPassword(auth,email,password)
+    // .then((userCredential)=>{
+    //     const user = userCredential.user;
+    //     // usersession kiểu dữ liệu là đối tượng nên 
+    //     // phải dùng JSON.stringify(vale); để thành chuỗi json; 
 
-        const userSession = {
-            user:{
-                email: user.email
-            },
-            expiry:new Date().getTime() + 2*60*60*1000 // 2hours
-        };
-        localStorage.setItem('user_session',JSON.stringify(userSession));
-        window.location.href='index.html';
-    })
-    .catch(e =>{
-        regMessage.innerText="Lỗi"+e.messages;
-    });
+    //     const userSession = {
+    //         user:{
+    //             email: user.email
+    //         },
+    //         expiry:new Date().getTime() + 2*60*60*1000 // 2hours
+    //     };
+    //     localStorage.setItem('user_session',JSON.stringify(userSession));
+    //     window.location.href='index.html';
+    // })
+    // .catch(e =>{
+    //     regMessage.innerText="Lỗi"+e.messages;
+    // });
 
 }
 // gọi hàm sự kiện 

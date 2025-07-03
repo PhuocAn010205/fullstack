@@ -593,6 +593,78 @@ button.disabled {
     display: none;
   }
 }
+  /* them vao gio hang */
+  .header_cart-wrap:hover .header__cart-list{
+    display: block;
+}
+
+.header__cart-list {
+  position: absolute;
+    right: 96px;
+    background-color:var(--color-white);
+    width: 400px;
+    border-radius: 2px;
+    box-shadow: 0 1px 3.125rem 0 rgba(0, 0, 0, 0.2);
+    display: none;
+    animation: fadeIn ease-in 0.2s;
+    cursor: default;
+    z-index: 1;
+    top: 42px;
+      padding: 15px 10px;
+    
+}
+.header_cart-wrap{
+    position: relative;
+    display: inline-block;
+    padding: 0 12px;
+    cursor: pointer;
+    
+}
+.header__cart-list::after{
+       content: "";
+    position: absolute;
+    top: -17px;
+    border-width: 13px 13px;
+    border-style: solid;
+    border-color: transparent transparent var(--color-white) transparent;
+    cursor: pointer;
+    right: 1px;
+}
+.header__cart-no-cart-img{
+    width: 40%;
+    display: none;
+
+}
+/* khi gio hang khong co san pham thi class nay se them vao .header__cart-no-cart-img */
+.header__cart-list--no-cart {
+    padding: 24px 0;
+        display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header__cart-heading {
+    margin-top: 10px;
+ margin-left: 10px;
+ font-size: 1.5rem;
+ color: #4874b5;
+}
+.header-cart-item{
+    gap: 10px;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr;
+    align-items: center;
+}
+.header__cart-list-item {
+    margin-top: 15px;
+}
+.header__cart-list-item {
+    padding-left: 0;
+    list-style: none;
+    height: 56vh;
+    overflow-y: auto;
+}
+
 
 @media (max-width: 480px) {
   .logo img {
@@ -749,87 +821,3 @@ button.disabled {
     margin-top: 10px;
     margin-bottom: 20px;
   }
-  /* them vao gio hang */
-  .header_cart-wrap:hover .header__cart-list{
-    display: block;
-}
-
-.header__cart-list {
-  position: absolute;
-    right: 96px;
-    background-color: white;
-    width: 400px;
-    border-radius: 2px;
-    box-shadow: 0 1px 3.125rem 0 rgba(0, 0, 0, 0.2);
-    top: calc(100% + 4px);
-    display: none;
-    animation: fadeIn ease-in 0.2s;
-    cursor: default;
-    z-index: 1;
-    top: 42px;
-        padding: 15px 10px;
-    
-}
-.header_cart-wrap{
-    position: relative;
-    display: inline-block;
-    padding: 0 12px;
-    cursor: pointer;
-    
-}
-.header__cart-list::after{
-       content: "";
-    position: absolute;
-    top: -17px;
-    border-width: 13px 13px;
-    border-style: solid;
-    border-color: transparent transparent white transparent;
-    cursor: pointer;
-    right: 1px;
-}
-.header__cart-no-cart-img{
-    width: 40%;
-    display: none;
-
-}
-.header__cart-list--no-cart {
-    padding: 24px 0;
-}
-.header__cart-list--no-cart .header__cart-no-cart-img,
-.header__cart-list--no-cart .header__cart-no-cart-msg{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-.header__cart-icon {
-    color: var(--white-color);
-    font-size:3.6rem;
-
-}
-.header__cart-no-cart-msg {
-    display: none;
-    font-size: 1.6rem;
-    margin-top: 14px;
-    color: var(--text-color);
-}
-.header__cart-heading {
-    margin-top: 10px;
- margin-left: 10px;
- font-size: 1.5rem;
- color: #4874b5;
-}
-.header-cart-item{
-    gap: 10px;
-    display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr;
-    align-items: center;
-}
-.header__cart-list-item {
-    margin-top: 15px;
-}
-.header__cart-list-item {
-    padding-left: 0;
-    list-style: none;
-    height: 56vh;
-    overflow-y: auto;
-}
