@@ -75,6 +75,7 @@ const updateIndicators = () => {
 setTransform(index, false);
 renderIndicators();
 resetAutoSlide();
+
 // products best nút trượt 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -108,5 +109,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
   updateSlider();
 });
+// click product images
 
-
+const imagesSmall = document.querySelectorAll('.product__thumb-track img');
+const imgaeMain = document.querySelector('.main__img')
+ for( let product = 0 ;product < imagesSmall.length;product++){
+    imagesSmall[product].addEventListener('click',()=>{
+      imgaeMain.src =imagesSmall[product].src;
+    })
+ }

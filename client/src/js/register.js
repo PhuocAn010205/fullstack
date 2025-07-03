@@ -56,26 +56,26 @@ const handleRegister = function (event) {
        return;
   } 
    
-   createUserWithEmailAndPassword(auth,email,password).then((userCredential)=> {
-    const user = userCredential.user;
-    const userData = {
-        username,
-        email,
-        password:hashedPwd, /*không lưu password plaintext=> mã hóa */
-        role_id,
-        balance: 0,
-    };
-    return addDoc(collection(db,"users"),userData);
-   })
-   .then(()=>{
-       regMessage.innerText="Đăng kí thành công ^.^."
-       regMessage.style.color="green";
-       window.location.href="login.html";
-   })
-   .catch((e) => {
-    regMessage.innerText ="Lỗi:"+e.message;
-    regMessage.style.color="red";
-   })
+  //  createUserWithEmailAndPassword(auth,email,password).then((userCredential)=> {
+  //   const user = userCredential.user;
+  //   const userData = {
+  //       username,
+  //       email,
+  //       password:hashedPwd, /*không lưu password plaintext=> mã hóa */
+  //       role_id,
+  //       balance: 0,
+  //   };
+  //   return addDoc(collection(db,"users"),userData);
+  //  })
+  //  .then(()=>{
+  //      regMessage.innerText="Đăng kí thành công ^.^."
+  //      regMessage.style.color="green";
+  //      window.location.href="login.html";
+  //  })
+  //  .catch((e) => {
+  //   regMessage.innerText ="Lỗi:"+e.message;
+  //   regMessage.style.color="red";
+  //  })
 };
 registerForm.addEventListener('submit',handleRegister);
 // hien thi mk
