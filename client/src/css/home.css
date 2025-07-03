@@ -486,66 +486,106 @@ button.disabled {
 }
 
 /* footer */
-.footer {
-  background: hsl(0 0% 92%);
-  padding-top: 30px;
-  border-top: 5px solid var(--color-btn);
+.footer{
+    background: #10375C;
+    padding-top: 100px;
+}
+.footer__row {
+    display:grid;
+    column-gap: 78px;
+    grid-template-columns: 0.1fr 1.5fr 1.5fr 1fr ;
+}
+.footer__desc {
+    margin-top: 20px;
+    color: #A9B3BB;
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height:1.75; /* 175% */
+    max-width: 336px;
+}
+.footer__heading {
+    margin-bottom: 20px;
+    color: #FFF;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height:1.75; /* 175% */
+}
+.footer__list {
+    margin-bottom: 28px;
+}
+.footer__item {
+    margin-bottom: 10px;
+}
+.footer__link {
+    color: #A9B3BB;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.85; /* 185.714% */
+    white-space: nowrap;/*Giong cho chu dai khong bi be xuong hang nua*/
+}
+.footer__link:hover {
+    color: pink;
+    text-decoration: underline;/*them gach chan duoi chu*/
+}
+.footer__social {
+    display: flex;
+    column-gap: 10px;
+
+}
+.footer__social-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #FFF;
+     display: flex;
+     justify-content: center;
+      align-items: center;
+      color: #2E80CE;
+      transition: 0.25s;
+      margin-bottom: 28px;
+}
+.footer__social-btn:hover{
+  background: #2E80CE;
+  color: #fff;
 }
 
-.member__list {
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  column-gap: 30px;
+.footer-form {
+    margin-top: 10px;
+    display: flex;
+    column-gap: 12px;
 }
-
-.member-item {
-  background: #FFF;
-  border-radius: 10px;
-  padding: 20px 10px;
-}
-
-.member-item__img-bg {
+.footer-form__input {
+  width: 212px;
+  height: 46px;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #406181;
   background: transparent;
-  padding-top: 28px;
-  overflow: hidden;
-  /*an noi dung neu noi dai ra ngoai*/
+  padding: 0 10px;
+  color: #FFF;
 }
-
-.member-item__thumb:hover {
-  transform: scale(1.1);
-  border-radius: 5px;
-
+.footer-form__input::placeholder{
+    color: #9CA8B1;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.85; /* 185.714% */
 }
-
-.member-item__thumb {
-  display: block;
-  max-width: 100%;
-  object-fit: cover;
-  transition: 0.25s;
+.footer-form__submit {
+    min-width: 108px;
+    --height: 46px;
+    border-radius: 4px;
+    font-size: 1.4rem;
 }
-
-.member-item__name {
-  margin-top: 10px;
-  color: var(--color-price);
-  font-weight: 500;
-  line-height: 1.5;
-  font-size: 2rem;
+.footer__copyright {
+    border-top: 1px solid #406181;
+    padding: 28px 0 42px;
 }
-
-
-.member-item__title {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  color: var(--color-black);
-  font-size: 1.4rem;
-  font-weight: 500;
-  line-height: 1.85;
-  /* 185.714% */
-}
-
-.btn__footer {
-  margin-top: 10px;
+.footer__copyright-text{
+    color: #AAB3BA;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.85; /* 185.714% */
 }
 
 /* Responsive*/
