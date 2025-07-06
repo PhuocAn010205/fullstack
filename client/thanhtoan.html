@@ -114,7 +114,7 @@
                   <button class=" btn home-filter__btn"  onclick="location.href='cart.html'">Xem Giỏ Hàng</button>
               </div>
         </div>
-       <a href="login.html">
+     <a href="login.html">
           <i class="fa-solid fa-user"></i>
            <span id="name">Đăng nhập</span>
            <i class="fa-solid fa-right-from-bracket bracket" id="userIcon"></i>
@@ -145,33 +145,13 @@
 <section class="product-detail">
 
     <div class="container">
-        <div class="row-grid-top">
-            <ul class="breadcrumb">
-                <li>
-                    <a href="home.html">Trang chủ</a>
-                    <span>></span>
-                </li>
-                <li>
-                    <p>Gỏi hàng </p>
-                </li>
-            </ul>
-        </div>
         <!-- cart  -->
         <div class="cart-container">
             <div>
                 <div class="cart-left">
 
                     <table>
-                        <thead>
-                            <tr>
-                                <th><input type="checkbox" checked></th>
-                                <th>Sản phẩm</th>
-                                <th>Đơn giá</th>
-                                <th>Số lượng</th>
-                                <th>Thành tiền</th>
-                                <th>Xoá</th>
-                            </tr>
-                        </thead>
+
                         <tbody>
                             <!-- san pham 1 -->
                             <tr class="cart-item">
@@ -194,8 +174,10 @@
                                         <button class="quantity-button btn-plus">+</button>
                                     </div>
                                 </td>
-                                <td><strong class="subtotal">75.000 đ</strong></td>
-                                <td><i class="fa fa-trash"></i></td>
+                                <td>
+                                    <div style="    margin-top: 12px;"><strong class="subtotal">75.000 đ</strong>
+                                    <i class="fa fa-trash"></i>
+                                    </div></td>
                             </tr>
                             <!-- san pham 2 -->
                             <tr class="cart-item">
@@ -218,12 +200,98 @@
                                         <button class="quantity-button btn-plus">+</button>
                                     </div>
                                 </td>
-                                <td><strong class="subtotal">75.000 đ</strong></td>
-                                <td><i class="fa fa-trash"></i></td>
+                                <td>
+                                    <div style="    margin-top: 12px;"><strong class="subtotal">75.000 đ</strong>
+                                    <i class="fa fa-trash"></i>
+                                    </div></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <!--dien form -->
+                <div class="cart-input">
+                    <h2 class="section__heading">Thông tin giao hàng</h2>
+                    <div class="cart-input-name-phone">
+                        <input type="text" placeholder="Nhập họ và tên" name="" id="">
+                        <input type="text" placeholder="Nhập số điện thoại" name="" id="">
+                    </div>
+                    <div class="cart-input-email">
+                        <input type="email" placeholder="Nhập email" name="" id="">
+                    </div>
+                    <div class="cart-input-select">
+                        <select name="" id="province">
+                            <option value="" >Tỉnh/Tp</option>
+                        </select>
+                        <select name="" id="district">
+                            <option value="">Quận/Huyện</option>
+                        </select>
+                        <select name="" id="ward">
+                            <option value="">Phường/Xã</option>
+                        </select>
+                    </div>
+                    <div class="cart-input-adress">
+                        <input type="text" placeholder="Địa chỉ nhà " name="" id="">
+                    </div>
+                    <div class="cart-input-note">
+                        <input type="text" placeholder="Ghi chú" name="" id="">
+                    </div>
+                    <button class="btn" style="margin-left: 12px;">Gửi Đơn Hàng</button>
+                </div>
+                <!-- tien -->
+                  <div class="payment-container">
+    <h3>Chọn phương thức thanh toán</h3>
+
+    <label class="payment-option">
+      <input type="radio" name="payment" checked>
+      <img src="./src/img/cod.png" alt="">
+      <span class="payment-label">Thanh toán tiền mặt khi nhận hàng</span>
+    </label>
+
+    <label class="payment-option">
+      <input type="radio" name="payment">
+      <img src="./src/img/zalo.png" alt="">
+      <span class="payment-label">Thanh toán bằng ví ZaloPay</span>
+    </label>
+       <label class="payment-option">
+      <input type="radio" name="payment">
+      <img src="./src/img/aqr.webp" alt="">
+      <span class="payment-label">Thanh toán bằng chuyển khoản (QR Code)</span>
+    </label>
+    <label class="payment-option">
+      <input type="radio" name="payment">
+      <img src="./src/img/momo.png" alt="">
+      <span class="payment-label">Thanh toán bằng ví MoMo</span>
+    </label>
+
+   
+             </div>
+             <!-- don vi van chuyen -->
+             <div class="payment-container">
+      <h3>Chọn đơn vị vận chuyển</h3>
+      <label class="payment-option">
+        <input type="radio" name="shipping" checked>
+        <img src="./src/img/exp.png" alt="Grab Express">
+        <span class="payment-label">Grab Express</span>
+      </label>
+
+      <label class="payment-option">
+        <input type="radio" name="shipping">
+        <img src="./src/img/giaohangnha.png" alt="GHN">
+        <span class="payment-label">Giao hàng nhanh (GHN)</span>
+      </label>
+
+      <label class="payment-option">
+        <input type="radio" name="shipping">
+        <img src="./src/img/vietpost.png" alt="Viettel">
+        <span class="payment-label">Viettel Post</span>
+      </label>
+
+      <label class="payment-option">
+        <input type="radio" name="shipping">
+        <img src="./src/img/j&t.png" alt="J&T">
+        <span class="payment-label">J&T Express</span>
+      </label>
+    </div>
             </div>
             <div class="cart-summary">
 
@@ -232,7 +300,7 @@
                     <div class="total"><strong>Tổng tiền</strong><strong class="price-final" id="total">75.000
                             đ</strong></div>
                 </div>
-                <button class="btn" onclick="location.href='thanhtoan.html'">Thanh toán</button>
+                <button class="btn">Đặt hàng</button>
             </div>
         </div>
 
@@ -247,17 +315,7 @@
         
         <div class="container">
             <div class="footer__row">
-               <div class="footer__column">
-                <div class="logo">
-                    <span class="logo__circle">
-    
-                    </span>
-                   
-                </div>
-                <ul class="footer__list">
-               
-                </ul>
-               </div>
+            
                <div class="footer__column">
                 <h3 class="footer__heading">Danh mục</h3>
                 <ul class="footer__list">
