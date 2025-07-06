@@ -59,12 +59,13 @@ app.post('/register', async (req, res) => {
 });
 
 // Lấy danh sách người dùng (tuỳ chọn - dùng để debug)
-app.get('/register', (req, res) => {
-  connection.query('SELECT * FROM users', (err, results) => {
-    if (err) return res.status(500).json({ message: 'Lỗi truy vấn CSDL' });
-    res.status(200).json(results);
-  });
+app.get('/api/users', (req, res) => {
+    db.query('SELECT id, username, email, created_at FROM users', (err, results) => {
+        if (err) return res.status(500).json({ error: err });
+        res.json(results);
+    });
 });
+
 
 // Đăng nhập
 app.post('/login', async (req, res) => {
@@ -94,7 +95,52 @@ app.post('/login', async (req, res) => {
     }
   );
 });
+// Lấy danh sách sản phẩm (tuỳ chọn - dùng để debug)
+app.get('/users', (req, res) => {
+  connection.query('SELECT id, username, email, created_at FROM users', (err, results) => {
+    if (err) return res.status(500).json({ message: 'Lỗi truy vấn CSDL' });
+    res.status(200).json(results);
+  });
+});
+// thêm sản phẩm 
+app.post('/products', (req, res) => {
+  const {
+    product_name,
+    category,
+    product_type,
+    current_price,
+    discount_price,
+    thumbnail_url,
+    stock_quantity,
+    description
+  } = req.body;
 
+  const query = `
+    INSERT INTO addproduct (
+      product_name, category, product_type,
+      current_price, discount_price,
+      thumbnail_url, stock_quantity, description
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  connection.query(query, [
+    product_name, category, product_type,
+    current_price, discount_price,
+    thumbnail_url, stock_quantity, description
+  ], (err, result) => {
+    if (err) return res.status(500).json({ message: 'Lỗi khi thêm sản phẩm', error: err });
+    res.status(200).json({ message: 'Sản phẩm đã được thêm', product_id: result.insertId });
+  });
+});
+// thêm sản phẩm 
+
+// app.delete('/products/:id', (req, res) => {
+//   const productId = req.params.id;
+//   connection.query('DELETE FROM addproduct WHERE id = ?', [productId], (err, result) => {
+//     if (err) return res.status(500).json({ message: 'Lỗi khi xoá sản phẩm' });
+//     res.status(200).json({ message: 'Đã xoá sản phẩm thành công' });
+//   });
+// });
 // ---------------------- START SERVER ---------------------- //
 app.listen(port, () => {
   console.log(`🚀 Server đang chạy tại http://localhost:${port}`);
