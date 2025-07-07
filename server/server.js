@@ -3,6 +3,8 @@ const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const path = require('path');
+const multer = require('multer');
+const fs = require('fs');
 
 const app = express();
 const port = 3000;
@@ -12,6 +14,20 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client')));
 
+
+// Static serve thư mục chứa ảnh upload
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Cấu hình multer để upload file
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, uploadsDir),
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname);
+    const uniqueName = `${file.fieldname}-${Date.now()}${ext}`;
+    cb(null, uniqueName);
+  }
+});
+const upload = multer({ storage });
 // Kết nối MySQL
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -102,17 +118,28 @@ app.get('/users', (req, res) => {
     res.status(200).json(results);
   });
 });
-// thêm sản phẩm 
+
+// ======================= PRODUCT ======================= //
+const productDb = mysql.createConnection({
+  host: 'localhost',
+  user: 'admin',
+  password: '01022005an',
+  database: 'addproduct'
+});
+
+productDb.connect(err => {
+  if (err) {
+    console.error('❌ Kết nối product_db thất bại:', err);
+    return;
+  }
+  console.log('✅ Kết nối product_db thành công!');
+});
+// Thêm sản phẩm
 app.post('/products', (req, res) => {
   const {
-    product_name,
-    category,
-    product_type,
-    current_price,
-    discount_price,
-    thumbnail_url,
-    stock_quantity,
-    description
+    product_name, category, product_type,
+    current_price, discount_price,
+    thumbnail_url, stock_quantity, description
   } = req.body;
 
   const query = `
@@ -123,15 +150,33 @@ app.post('/products', (req, res) => {
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
-  connection.query(query, [
+  productDb.query(query, [
     product_name, category, product_type,
     current_price, discount_price,
     thumbnail_url, stock_quantity, description
   ], (err, result) => {
-    if (err) return res.status(500).json({ message: 'Lỗi khi thêm sản phẩm', error: err });
+    if (err) {
+      console.error('❌ Lỗi khi thêm sản phẩm:', err);
+      return res.status(500).json({ message: 'Lỗi khi thêm sản phẩm', error: err });
+    }
     res.status(200).json({ message: 'Sản phẩm đã được thêm', product_id: result.insertId });
   });
 });
+
+// API lấy danh sách sản phẩm
+app.get('/products', (req, res) => {
+  const query = 'SELECT * FROM addproduct ORDER BY created_at DESC';
+
+  productDb.query(query, (err, results) => {
+    if (err) {
+      console.error('❌ Lỗi khi truy vấn sản phẩm:', err);
+      return res.status(500).json({ message: 'Lỗi khi lấy sản phẩm', error: err });
+    }
+    res.status(200).json(results);
+  });
+});
+
+
 // thêm sản phẩm 
 
 // app.delete('/products/:id', (req, res) => {
