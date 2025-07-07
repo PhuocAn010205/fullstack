@@ -489,7 +489,7 @@ button.disabled {
 .footer{
     background: #10375C;
     padding-top: 100px;
-    font-family: "Open Sans", serif;
+    font-family: "Inter", sans-serif;
 }
 .footer__row {
     display:grid;
