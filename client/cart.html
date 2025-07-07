@@ -114,7 +114,11 @@
                   <button class=" btn home-filter__btn"  onclick="location.href='cart.html'">Xem Giỏ Hàng</button>
               </div>
         </div>
-        <a href="login.html"><i class="fa-solid fa-user"></i> <span>Đăng nhập</span></a>
+       <a href="login.html">
+          <i class="fa-solid fa-user"></i>
+           <span id="name">Đăng nhập</span>
+           <i class="fa-solid fa-right-from-bracket bracket" id="userIcon"></i>
+          </a>
       </div>
         </div>
         <div class="header-bottom">
@@ -137,7 +141,7 @@
     </div>
 </header>
 <!-- product-detail -->
-
+<main>
 <section class="product-detail">
 
     <div class="container">
@@ -181,7 +185,7 @@
                                 </td>
                                 <td>
                                     <span class="price-old">100.000 đ</span><br>
-                                    <span class="price-new unit-price">75.000 đ</span> đ
+                                    <span class="price-new unit-price">75.000 đ</span> 
                                 </td>
                                 <td>
                                     <div class="quantity-control">
@@ -205,7 +209,7 @@
                                 </td>
                                 <td>
                                     <span class="price-old">100.000 đ</span><br>
-                                    <span class="price-new unit-price">75.000 đ</span> đ
+                                    <span class="price-new unit-price">75.000 đ</span> 
                                 </td>
                                 <td>
                                     <div class="quantity-control">
@@ -220,35 +224,6 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- địa chỉ -->
-                <div class="cart-input">
-                    <h2 class="section__heading">Thông tin giao hàng</h2>
-                    <div class="cart-input-name-phone">
-                        <input type="text" placeholder="Nhập họ và tên" name="" id="">
-                        <input type="text" placeholder="Nhập số điện thoại" name="" id="">
-                    </div>
-                    <div class="cart-input-email">
-                        <input type="email" placeholder="Nhập email" name="" id="">
-                    </div>
-                    <div class="cart-input-select">
-                        <select name="" id="province">
-                            <option value="" >Tỉnh/Tp</option>
-                        </select>
-                        <select name="" id="district">
-                            <option value="">Quận/Huyện</option>
-                        </select>
-                        <select name="" id="ward">
-                            <option value="">Phường/Xã</option>
-                        </select>
-                    </div>
-                    <div class="cart-input-adress">
-                        <input type="text" placeholder="Địa chỉ nhà " name="" id="">
-                    </div>
-                    <div class="cart-input-note">
-                        <input type="text" placeholder="Ghi chú" name="" id="">
-                    </div>
-                    <button class="btn">Gửi Đơn Hàng</button>
-                </div>
             </div>
             <div class="cart-summary">
 
@@ -257,7 +232,7 @@
                     <div class="total"><strong>Tổng tiền</strong><strong class="price-final" id="total">75.000
                             đ</strong></div>
                 </div>
-                <button class="btn">Thanh toán</button>
+                <button class="btn" onclick="location.href='thanhtoan.html'">Thanh toán</button>
             </div>
         </div>
 
@@ -265,6 +240,8 @@
     </div>
 
 </section>
+
+</main>
 <!-- footer -->
 <footer class="footer" id="footer">
         
@@ -339,7 +316,7 @@
             </div>
             <div class="footer__copyright">
                 <p class="footer__copyright-text">
-                    2021 GDN. Copyright and All rights reserved.
+                    Copyright © 2025 Nhom Sieu Thu. All rights reserved.
                 </p>
             </div>
         </div>
@@ -435,6 +412,7 @@
         // Gọi hàm lần đầu khi trang tải xong
         updateCart();
     </script>
+    <script src="./src/js/main.js"></script>
 </body>
 
 </html>

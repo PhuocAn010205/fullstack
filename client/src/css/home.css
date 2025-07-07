@@ -172,9 +172,9 @@ header {
 
 /* danh mục */
 .header-bottom {
-  display: flex;
-  justify-items: center;
-  align-items: center;
+     display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .header-bottom__left {
@@ -489,11 +489,19 @@ button.disabled {
 .footer{
     background: #10375C;
     padding-top: 100px;
+<<<<<<< HEAD
+=======
+    font-family: "Open Sans", serif;
+>>>>>>> 2dfcc70 (fix nhiều)
 }
 .footer__row {
     display:grid;
     column-gap: 78px;
+<<<<<<< HEAD
     grid-template-columns: 0.1fr 1.5fr 1.5fr 1fr ;
+=======
+    grid-template-columns: 1fr 0.4fr 0.4fr 1fr ;
+>>>>>>> 2dfcc70 (fix nhiều)
 }
 .footer__desc {
     margin-top: 20px;
@@ -589,6 +597,7 @@ button.disabled {
 }
 
 /* Responsive*/
+<<<<<<< HEAD
 @media (max-width: 1024px) {
   .container {
     width: 100%;
@@ -739,6 +748,8 @@ button.disabled {
   }
 
 }
+=======
+>>>>>>> 2dfcc70 (fix nhiều)
 /* Phần mega menu khi hover vào  */
     /* .menu-container {
       position: relative;
@@ -840,6 +851,13 @@ button.disabled {
   color: var(--color-black);
   outline: none;
 }
+.bracket{
+  display: none;
+}
+.bracket_active {
+  display: block;
+}
+
 /* pro__list-item */
   .pro__list-item {
     display: flex;
