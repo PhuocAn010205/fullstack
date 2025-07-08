@@ -55,9 +55,9 @@
         <button class="cart-btn"  onclick="location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> <span>Giỏ hàng</span></button>
           <!-- No cart: thêm  header__cart-list--no-cart vô -->
               <div class="header__cart-list ">
-                  <img src="assest/img/empty-cart.png" alt="" class="header__cart-no-cart-img">
+                  <img src="./src/img/empty-cart.png" alt="" class="header__cart-no-cart-img">
                   <span class="header__cart-no-cart-msg">
-                      Chưa có sẩn phẩm 
+                      Chưa có sản phẩm
                   </span>
                   <h4 class="header__cart-heading"> Sản phẩm đã thêm</h4>
                   <ul class="header__cart-list-item">
@@ -150,7 +150,7 @@
 
 <section class="product-detail">
 
-  <div class="container">
+  <div class="container"  id="productDetail">
     <div class="row-grid-top">
       <ul class="breadcrumb">
         <li>
@@ -324,9 +324,78 @@
   <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script> -->
+        <script>// Lấy ID từ URL
+const urlParams = new URLSearchParams(window.location.search);
+  const productId = urlParams.get('id');
+
+  if (!productId) {
+    alert('Không tìm thấy ID sản phẩm. Vui lòng quay lại danh sách.');
+    window.location.href = '/';
+  } else {
+    fetch(`/api/products/${productId}`)
+      .then(response => {
+        if (!response.ok) throw new Error('Không tìm thấy sản phẩm');
+        return response.json();
+      })
+      .then(product => {
+        if (!product) {
+          alert('Không tìm thấy sản phẩm');
+          return;
+        }
+
+        // Nếu gallery là chuỗi, chuyển thành mảng
+        const gallery = Array.isArray(product.gallery_urls)
+          ? product.gallery_urls
+          : product.gallery_urls.split(',').map(url => url.trim());
+
+        const container = document.querySelector('#productDetail'); // container của bạn
+
+        container.innerHTML = `
+          <div class="product__box">
+            <div class="product__card">
+              <div class="product__img-big">
+                <img class="main__img" src="${product.thumbnail_url}" alt="${product.product_name}">
+              </div>
+              <div class="product__thumb-slider">
+                <div class="product__thumb-track">
+                  ${gallery.map(url => `<img src="${url}" alt="">`).join('')}
+                </div>
+              </div>
+            </div>
+            <div class="product__content">
+              <h2 class="heading__title">${product.product_name}</h2>
+              <a href="${product.certificate_url || '#'}" class="link">
+                <img src="./src/img/real.png" alt="real">
+              </a>
+              <h2 class="price">${formatCurrency(product.current_price)}</h2>
+              <p class="content__desc">Giá đã bao gồm thuế. Phí vận chuyển và các chi phí khác (nếu có) sẽ được thể hiện khi đặt hàng.</p>
+              <div class="product-item__action">
+                <span class="product-item__like"><i class="fa-solid fa-heart"></i>25.4k</span>
+                <span class="product-item__sold">Đã bán 6.1k</span>
+              </div>
+              <div class="information">
+                <a href="${product.certificate_url || '#'}" class="link__bc">
+                  <i class="fa-solid fa-file"></i><span>xem giấy công bố sản phẩm</span>
+                </a>
+              </div>
+              <p class="classify">Phân loại sản phẩm</p>
+              <button class="btn btn__type">${product.product_type || 'Chưa phân loại'}</button>
+              <div class="about__product">
+                ${product.description.split('\n').map(line => `<p class="about__product-content">${line}</p>`).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      })
+      .catch(err => {
+        console.error('Lỗi tải sản phẩm:', err);
+        alert('Có lỗi khi tải sản phẩm. Vui lòng thử lại.');
+      });
+  }
+
+</script>
         <script src="./src/js/main.js"></script>
         <script src="./src/js/product.js"></script>
-        <script src="./src/js/check-session.js"></script>
 </body>
 
 </html>

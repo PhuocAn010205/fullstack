@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,9 @@
     <link rel="stylesheet" href="./src/css/admin.css">
     <link rel="stylesheet" href="./src/css/reset.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
+
 </head>
+
 <body>
     <div class="admin-container">
         <!-- Sidebar -->
@@ -52,8 +54,8 @@
                         <i class="fas fa-cog"></i> Cài đặt
                     </a>
                 </li>
-           
-               
+
+
             </ul>
         </nav>
 
@@ -169,7 +171,7 @@
                 <section id="products" class="section">
                     <div class="section-header">
                         <h2>Quản lý sản phẩm</h2>
-                        
+
                     </div>
                     <div class="table-container">
                         <table class="data-table">
@@ -254,44 +256,58 @@
 
                 <!-- Add Product Section -->
                 <section id="add-product-section" class="section" style="display:none">
-                   <div class="section-header">
-                    <h2>Thêm sản phẩm</h2>
-                </div>
-                    <form id="addProductFormCustom" class="add-product-grid">
-                      <div class="left-col">
-                        <div>
-                          <label for="productName">Tên sản phẩm:</label>
-                          <input type="text" id="productName" name="productName" required>
+                    <div class="section-header">
+                        <h2>Thêm sản phẩm</h2>
+                    </div>
+                    <form id="addProductFormCustom" class="add-product-grid" method="post" enctype="multipart/form-data">
+                        <div class="left-col">
+                            <div>
+                                <label for="productName">Tên sản phẩm:</label>
+                                <input type="text" id="productName" name="productName" required>
+                            </div>
+                            <div>
+                                <label for="currentPrice">Giá bán:</label>
+                                <input type="number" id="currentPrice" name="price" required>
+                                <!-- 👆 sửa name="currentPrice" ➜ name="price" -->
+                            </div>
+                            <div>
+                                <label for="material">Chất liệu:</label>
+                                <input type="text" id="material" name="material">
+                            </div>
+                            <div>
+                                <label for="discountPrice">Giá giảm:</label>
+                                <input type="number" id="discountPrice" name="discountPrice">
+                            </div>
+                            <div>
+                                <label for="description">Mô tả:</label>
+                                <textarea id="description" name="description"></textarea>
+                            </div>
+                            <div>
+                                <label for="category">Danh mục:</label>
+                                <input type="text" id="category" name="category" required>
+                                <!-- 👆 thêm trường category -->
+                            </div>
+                            <div>
+                                <label for="stock">Tồn kho:</label>
+                                <input type="number" id="stock" name="stock" required>
+                                <!-- 👆 thêm trường stock -->
+                            </div>
                         </div>
-                        <div>
-                          <label for="currentPrice">Giá bán:</label>
-                          <input type="number" id="currentPrice" name="currentPrice" required>
+
+                        <div class="right-col">
+                            <div class="image-upload">
+                                <label for="thumbnail" class="image-label">Ảnh Đại Diện</label>
+                               <input type="file" name="thumbnail" id="thumbnail" accept="image/*" required>
+                            </div>
+                            <div class="image-upload">
+                                <label for="productImages" class="image-label">Ảnh Sản Phẩm</label>
+                               <input type="file" name="productImages" id="productImages" multiple accept="image/*">
+                            </div>
                         </div>
-                        <div>
-                          <label for="material">Chất liệu:</label>
-                          <input type="text" id="material" name="material">
-                        </div>
-                        <div>
-                          <label for="discountPrice">Giá giảm:</label>
-                          <input type="number" id="discountPrice" name="discountPrice">
-                        </div>
-                        <div>
-                          <label for="description">Mô tả:</label>
-                          <textarea id="description" name="description"></textarea>
-                        </div>
-                      </div>
-                      <div class="right-col">
-                        <div class="image-upload">
-                          <label for="thumbnail" class="image-label">Ảnh Đại Diện</label>
-                          <input type="file" id="thumbnail" name="thumbnail" accept="image/*" required>
-                        </div>
-                        <div class="image-upload">
-                          <label for="productImages" class="image-label">Ảnh Sản Phẩm</label>
-                          <input type="file" id="productImages" name="productImages" accept="image/*" multiple>
-                        </div>
-                      </div>
-                      <button type="submit" class="full-width-btn">Thêm sản phẩm</button>
+
+                        <button type="submit" class="full-width-btn">Thêm sản phẩm</button>
                     </form>
+
                     <img id="thumbnailPreview" class="image-preview" style="display:none;">
                     <img id="productImagesPreview" class="image-preview" style="display:none;">
                 </section>
@@ -336,56 +352,17 @@
         </div>
     </div>
 
-    <!-- Add Product Modal -->
-    <!-- <div id="addProductModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Thêm sản phẩm mới</h3>
-                <span class="close" onclick="closeModal('addProductModal')">&times;</span>
-            </div>
-            <form id="addProductForm">
-                <div class="form-group">
-                    <label>Tên sản phẩm</label>
-                    <input type="text" name="productName" required class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Mô tả</label>
-                    <textarea name="description" class="form-control" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Giá</label>
-                    <input type="number" name="price" required class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Danh mục</label>
-                    <select name="category" class="form-control">
-                        <option value="electronics">Điện tử</option>
-                        <option value="clothing">Quần áo</option>
-                        <option value="books">Sách</option>
-                        <option value="home">Nhà cửa</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Số lượng tồn kho</label>
-                    <input type="number" name="stock" required class="form-control">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal('addProductModal')">Hủy</button>
-                    <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
-                </div>
-            </form>
-        </div>
-    </div> -->
-
+   
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="./src/js/adminmain.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      if (document.getElementById('description')) {
-        ClassicEditor.create(document.getElementById('description'));
-      }
-    });
+        document.addEventListener('DOMContentLoaded', function () {
+            if (document.getElementById('description')) {
+                ClassicEditor.create(document.getElementById('description'));
+            }
+        });
     </script>
 </body>
+
 </html>

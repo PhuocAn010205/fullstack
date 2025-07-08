@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (username) {
     nameSpan.innerText = username;
     userIcon.classList.add('bracket_active');
-    userLink.href = "#"; // Ngăn redirect lại login
+    // userLink.href = "#!"; // Ngăn redirect lại login
     userLink.addEventListener('click', (e) => {
       e.preventDefault();
       if (confirm("Bạn có muốn đăng xuất không?")) {

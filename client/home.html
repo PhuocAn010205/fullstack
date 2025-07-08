@@ -54,9 +54,9 @@
         <button class="cart-btn"  onclick="location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> <span>Giỏ hàng</span></button>
           <!-- No cart: thêm  header__cart-list--no-cart vô -->
               <div class="header__cart-list ">
-                  <img src="assest/img/empty-cart.png" alt="" class="header__cart-no-cart-img">
+                  <img src="./src/img/empty-cart.png" alt="" class="header__cart-no-cart-img">
                   <span class="header__cart-no-cart-msg">
-                      Chưa có sẩn phẩm 
+                      Chưa có sản phẩm
                   </span>
                   <h4 class="header__cart-heading"> Sản phẩm đã thêm</h4>
                   <ul class="header__cart-list-item">
@@ -215,8 +215,8 @@
          <div class="pro__wrapper">
            <div class="pro__track">
         <!-- page 1 -->
-        <div class="pro__list">
-          <!-- <article class="product__item">
+        <div class="pro__list" id="product-list">
+          <article class="product__item">
             <div class="product__tag product__tag--new">Mới</div>
             <img src="./src/img/anhproduct1.webp" alt="Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN" class="img__product">
             <div class="content__product">
@@ -225,7 +225,7 @@
               <span class="status__product selling">Đang bán chạy</span>
             </div>
             <button class="btn" onclick="location.href='product.html'" > Chọn</button>
-          </article> -->
+          </article>
 
           <!-- <article class="product__item">
             <div class="product__tag product__tag--discount">Giảm 20%</div>
@@ -448,28 +448,53 @@
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script> -->
       <script>
-   async function loadProducts() {
-    const res = await fetch('http://localhost:3000/products');
-    const products = await res.json();
+async function loadProducts() {
+    try {
+      const res = await fetch('http://localhost:3000/products');
+      if (!res.ok) throw new Error('Lỗi khi tải sản phẩm');
 
-    const container = document.getElementById('product-list');
-    container.innerHTML = '';
+      const products = await res.json();
+      const container = document.getElementById('product-list');
+      if (!container) return;
 
-    products.forEach(product => {
-      const item = document.createElement('div');
-      item.classList.add('product-item');
-      item.innerHTML = `
-        <h3>${product.product_name}</h3>
-        <img src="${product.thumbnail_url}" width="150" />
-        <p>Giá gốc: ${product.current_price}đ</p>
-        <p>Giá khuyến mãi: ${product.discount_price}đ</p>
-        <p>${product.description}</p>
-      `;
-      container.appendChild(item);
-    });
+      container.innerHTML = '';
+products.forEach(product => {
+  const item = document.createElement('article');
+  item.className = 'product__item';
+
+  const imageUrl = product.thumbnail_url || './src/img/placeholder.png';
+  const productName = product.product_name || 'Sản phẩm không tên';
+  const price = product.discount_price !== null
+    ? `${parseFloat(product.discount_price).toLocaleString()} ₫`
+    : 'Liên hệ';
+
+  // ✅ Thêm dòng này ngay đây
+  const productId = product.id ?? '';
+
+  item.innerHTML = `
+    <div class="product__tag product__tag--new">Mới</div>
+    <img src="${imageUrl}" alt="${productName}" class="img__product">
+    <div class="content__product">
+      <h4 class="title__product">${productName}</h4>
+      <span class="product__price-new">${price}</span>
+      <span class="status__product selling">Đang bán chạy</span>
+    </div>
+    <button class="btn" onclick="location.href='product.html?id=${productId}'">Chọn</button>
+  `;
+
+  container.appendChild(item);
+});
+    } catch (err) {
+      console.error('Lỗi khi tải danh sách sản phẩm:', err);
+      const container = document.getElementById('product-list');
+      if (container) container.innerHTML = '<p>Không thể tải sản phẩm. Vui lòng thử lại sau.</p>';
+    }
   }
 
-  loadProducts();
+  // Gọi hàm khi trang đã sẵn sàng
+  document.addEventListener('DOMContentLoaded', loadProducts);
+
+
       </script>
   <script src="./src/js/main.js"></script>
   <script src="./src/js/function.js"></script>
