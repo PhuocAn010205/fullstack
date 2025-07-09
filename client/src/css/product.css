@@ -204,7 +204,7 @@
     padding-top: 20px;
 }
 
-.about__product-content {
+.about__product-content p{
     margin-top: 10px;
     font-size: 1.5rem;
     font-weight: 400;
@@ -523,4 +523,90 @@ border-radius: 5px;
       flex: 1;
       font-size: 16px;
       color: #333;
+    }
+    /* Warning */
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+      display: none;
+    }
+ .medicine-categories div img {
+      width: 120px;
+      height: 120px;
+      border-radius: 20%;
+      border: 3px solid #3993f5;
+      object-fit: cover;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+   
+    
+    /* Popup */
+    .popup {
+      
+    width: 90vw;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    padding: 32px 24px 24px 24px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10001;
+    text-align: center;
+    word-break: break-word;
+    }
+    #popupText strong {
+  color: red;
+  font-size: 1.1em;
+  font-weight: 600;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+#popupText b {
+  color: green;
+  font-size: 1.2em;
+   font-weight: 600;
+   text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+   margin-top: 10px;
+}
+ #popupText span {
+  color: black;
+  font-size: 1.7rem;
+}
+#popupText {
+    margin-top: 18px;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: justify;         /* Căn đều hai bên */
+    line-height: 1.8;
+    max-width: 100%;
+    word-break: break-word;      /* Tự động xuống dòng nếu dài */
+    white-space: pre-line;       /* Giữ xuống dòng nếu có */
+}
+
+
+    .popup img {
+      width: 500px;
+      border-radius: 20px;
+      margin-bottom: 15px;
+    }
+
+    .popup button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
     }

@@ -54,5 +54,5 @@ INSERT INTO addproduct (
 
 -- 5. Thêm ảnh phụ (ví dụ)
 INSERT INTO product_images (product_id, image_url) VALUES
-(1, '/uploads/anhproduct1_1.webp'),
-(1, '/uploads/anhproduct1_2.webp');
+(9, '/uploads/anhproduct1_1.webp'),
+(9, '/uploads/anhproduct1_2.webp');

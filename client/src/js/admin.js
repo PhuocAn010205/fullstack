@@ -49,6 +49,7 @@ function initializeAdmin() {
 }
 
 function setupEventListeners() {
+    login = document.getElementById('dnamine');
     document.getElementById('addUserForm')?.addEventListener('submit', handleAddUser);
     document.getElementById('addProductForm')?.addEventListener('submit', handleAddProduct);
 

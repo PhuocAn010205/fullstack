@@ -9,27 +9,34 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
-// Middleware
+// ======= Middleware =======
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client')));
-app.use('/uploads', express.static('uploads'));
 
-// app.use('/uploads', express.static('uploads'));
-// ======= MySQL USERS DB =======
-const connection = mysql.createConnection({
+// ======= Static folders =======
+const thumbnailDir = path.join(__dirname, '../client/src/uploads');
+const productImagesDir = path.join(__dirname, '../client/src/product_images');
+
+if (!fs.existsSync(thumbnailDir)) fs.mkdirSync(thumbnailDir, { recursive: true });
+if (!fs.existsSync(productImagesDir)) fs.mkdirSync(productImagesDir, { recursive: true });
+
+app.use('/uploads', express.static(thumbnailDir));
+app.use('/product_images', express.static(productImagesDir));
+
+// ======= MySQL Connections =======
+const userDb = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
   password: '01022005an',
   database: 'user_tables'
 });
 
-connection.connect(err => {
-  if (err) return console.error('❌ Kết nối MySQL thất bại:', err);
+userDb.connect(err => {
+  if (err) return console.error('❌ Kết nối MySQL (users) thất bại:', err);
   console.log('✅ Kết nối MySQL (users) thành công!');
 });
 
-// ======= MySQL PRODUCTS DB =======
 const productDb = mysql.createConnection({
   host: 'localhost',
   user: 'admin',
@@ -42,24 +49,22 @@ productDb.connect(err => {
   console.log('✅ Kết nối product_db thành công!');
 });
 
-// ======= File Upload Config =======
-const uploadsDir = path.join(__dirname, '../client/src/uploads');
-if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir);
-
-app.use('/uploads', express.static(uploadsDir)); // Serve static files
-
+// ======= Multer for Uploads =======
 const upload = multer({
   storage: multer.diskStorage({
-    destination: (req, file, cb) => cb(null, uploadsDir),
+    destination: (req, file, cb) => {
+      const dir = file.fieldname === 'thumbnail' ? thumbnailDir : productImagesDir;
+      cb(null, dir);
+    },
     filename: (req, file, cb) => {
       const ext = path.extname(file.originalname);
-      const name = `${file.fieldname}-${Date.now()}${ext}`;
-      cb(null, name);
+      const prefix = file.fieldname === 'thumbnail' ? 'thumbnail' : 'product';
+      cb(null, `${prefix}-${Date.now()}${ext}`);
     }
   })
 });
 
-// ======= ROUTES =======
+// ======= USER ROUTES =======
 
 // Register
 app.post('/register', async (req, res) => {
@@ -68,7 +73,7 @@ app.post('/register', async (req, res) => {
 
   try {
     const hash = await bcrypt.hash(password, 13);
-    connection.query(
+    userDb.query(
       'INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
       [username, hash, email],
       (err) => {
@@ -91,7 +96,7 @@ app.post('/login', async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) return res.status(400).json({ message: 'Thiếu thông tin' });
 
-  connection.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
+  userDb.query('SELECT * FROM users WHERE email = ?', [email], async (err, results) => {
     if (err) return res.status(500).json({ message: 'Lỗi server' });
     if (results.length === 0) return res.status(400).json({ message: 'Email không tồn tại' });
 
@@ -103,35 +108,36 @@ app.post('/login', async (req, res) => {
   });
 });
 
-// (Tuỳ chọn) Danh sách người dùng
+// Danh sách người dùng
 app.get('/users', (req, res) => {
-  connection.query('SELECT id, username, email, created_at FROM users', (err, results) => {
+  userDb.query('SELECT id, username, email, created_at FROM users', (err, results) => {
     if (err) return res.status(500).json({ message: 'Lỗi truy vấn CSDL' });
     res.status(200).json(results);
   });
 });
 
-// =================== PRODUCT API ===================
+// ======= PRODUCTS ROUTES =======
 
-// 1. Upload ảnh riêng
-app.post('/upload', upload.single('thumbnail'), (req, res) => {
-  if (!req.file) return res.status(400).json({ message: 'Không có file được tải lên' });
-
-  const thumbnail_url = `/uploads/${req.file.filename}`;
-  res.status(200).json({ message: 'Upload thành công', thumbnail_url });
-});
-
-
-
-// 2. Thêm sản phẩm
-app.post('/products', (req, res) => {
+// Thêm sản phẩm kèm ảnh đại diện và ảnh phụ
+app.post('/products', upload.fields([
+  { name: 'thumbnail', maxCount: 1 },
+  { name: 'images[]', maxCount: 10 }
+]), (req, res) => {
   const {
     product_name, current_price, discount_price,
-    product_type, category, description,
-    stock_quantity, thumbnail_url
+    product_type, category, description, stock_quantity
   } = req.body;
 
-  const query = `
+  const thumbnailFile = req.files?.thumbnail?.[0];
+  const images = req.files?.['images[]'] || [];
+
+  if (!product_name || !current_price || !thumbnailFile) {
+    return res.status(400).json({ message: 'Thiếu thông tin sản phẩm hoặc ảnh đại diện' });
+  }
+
+  const thumbnail_url = `/uploads/${thumbnailFile.filename}`;
+
+  const insertProductQuery = `
     INSERT INTO addproduct (
       product_name, current_price, discount_price,
       product_type, category, description,
@@ -139,47 +145,37 @@ app.post('/products', (req, res) => {
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
-  productDb.query(query, [
-    product_name, current_price, discount_price,
-    product_type, category, description,
-    stock_quantity, thumbnail_url
+  productDb.query(insertProductQuery, [
+    product_name, current_price, discount_price || null,
+    product_type, category, description, stock_quantity,
+    thumbnail_url
   ], (err, result) => {
     if (err) {
       console.error('❌ Lỗi thêm sản phẩm:', err);
       return res.status(500).json({ message: 'Lỗi thêm sản phẩm' });
     }
 
-    res.status(200).json({
-      message: 'Thêm sản phẩm thành công',
-      product_id: result.insertId
-    });
-  });
-});
-// Upload nhiều ảnh và lưu vào bảng product_images
-app.post('/upload-images', upload.array('images', 5), (req, res) => {
-    const { product_id } = req.body;
-    const files = req.files;
+    const product_id = result.insertId;
 
-    if (!product_id || !files?.length) {
-        return res.status(400).json({ message: 'Thiếu product_id hoặc không có ảnh' });
-    }
+    if (images.length > 0) {
+      const values = images.map(file => [product_id, `/product_images/${file.filename}`]);
+      const insertImagesQuery = 'INSERT INTO product_images (product_id, image_url) VALUES ?';
 
-    const values = files.map(file => [product_id, `/uploads/${file.filename}`]);
-    const query = 'INSERT INTO product_images (product_id, image_url) VALUES ?';
-
-    productDb.query(query, [values], (err, result) => {
-        if (err) {
-            console.error('Lỗi khi lưu ảnh phụ:', err);
-            return res.status(500).json({ message: 'Lỗi khi lưu ảnh phụ' });
+      productDb.query(insertImagesQuery, [values], (imgErr) => {
+        if (imgErr) {
+          console.error('❌ Lỗi lưu ảnh phụ:', imgErr);
+          return res.status(500).json({ message: 'Lỗi lưu ảnh phụ' });
         }
 
-        res.status(200).json({ inserted: result.affectedRows });
-    });
+        return res.status(200).json({ message: 'Thêm sản phẩm và ảnh thành công', product_id });
+      });
+    } else {
+      return res.status(200).json({ message: 'Thêm sản phẩm thành công (không có ảnh phụ)', product_id });
+    }
+  });
 });
 
-
-
-// 3. Lấy danh sách sản phẩm
+// Lấy danh sách sản phẩm
 app.get('/products', (req, res) => {
   const query = 'SELECT * FROM addproduct ORDER BY created_at DESC';
 
@@ -191,9 +187,10 @@ app.get('/products', (req, res) => {
     res.status(200).json(results);
   });
 });
+
+// Lấy chi tiết sản phẩm theo ID
 app.get('/api/products/:id', (req, res) => {
   const { id } = req.params;
-  console.log('Truy vấn ID:', id); // debug
 
   productDb.query('SELECT * FROM addproduct WHERE product_id = ?', [id], (err, results) => {
     if (err) {
@@ -208,7 +205,8 @@ app.get('/api/products/:id', (req, res) => {
     }
   });
 });
-// hiển thị ảnh phụ 
+
+// Lấy ảnh phụ của sản phẩm
 app.get('/api/images/:productId', (req, res) => {
   const { productId } = req.params;
   productDb.query('SELECT * FROM product_images WHERE product_id = ?', [productId], (err, results) => {
@@ -217,7 +215,7 @@ app.get('/api/images/:productId', (req, res) => {
   });
 });
 
-// =================== START SERVER ===================
+// ======= START SERVER =======
 app.listen(port, () => {
   console.log(`🚀 Server đang chạy tại http://localhost:${port}`);
 });

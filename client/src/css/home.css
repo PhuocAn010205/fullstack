@@ -428,7 +428,7 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.5;
-  text-align: justify;
+  text-align: -webkit-center;
 }
 
 .product__price-old {
@@ -688,7 +688,7 @@ button.disabled {
     transition: color 0.3s ease;
 }
 .home-filter__btn:hover{
-  color: var(--color-black);
+  color: var(--color-white);
   outline: none;
 }
 .bracket{
@@ -722,6 +722,22 @@ button.disabled {
   /* them vao gio hang */
   .header_cart-wrap:hover .header__cart-list{
     display: block;
+}
+.cart-badge{
+  position: absolute;
+    top: -13px;
+    right: 10px;
+    background: #ff6600;
+    color: #fff;
+    border-radius: 100%;
+    padding: 3px 7px;
+    font-size: 13px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+    border: 2px solid #fff;
+    z-index: 2;
+    display: inline-block;
 }
 
 .header__cart-list {

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./src/css/reset.css">
     <link rel="stylesheet" href="./src/css/home.css">
     <link rel="stylesheet" href="./src/css/product.css">
+    <link rel="stylesheet" href="./src/css/screen.css">
     <!-- <link rel="stylesheet" href="./src/css/main.css"> -->
     <!-- favicon -->
     <link rel="shortcut icon" href="./src/img/uthcare.png" type="image/x-icon">
@@ -52,7 +53,7 @@
             </div>
             <div class="header-actions">
                     <div class="header_cart-wrap">
-        <button class="cart-btn"  onclick="location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i> <span>Giỏ hàng</span></button>
+<button class="cart-btn"  onclick="location.href='cart.html'"><i class="fa-solid fa-cart-shopping"></i>  <span class="cart-badge" id="cartCount">0</span> <span>Giỏ hàng</span></button>
           <!-- No cart: thêm  header__cart-list--no-cart vô -->
               <div class="header__cart-list ">
                  
@@ -92,8 +93,7 @@
                     <li class="header-cart-item">
                          <img src="./src/img/anhproduct1.webp" alt="Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN" class="img__product" style="margin-left: 5px;">
                           <h4 class="title__product">Thực Phẩm Bảo Vệ Sức Khỏe Nucos NMN (Hộp 60 viên)</h4>
-                        
-              <span class="product__price-new" style="margin-top: 0; margin-left: 20px;">3.950.000 ₫/Hộp</span>
+<span class="product__price-new" style="margin-top: 0; margin-left: 20px;">3.950.000 ₫/Hộp</span>
                        
                     </li>   
                     <li class="header-cart-item">
@@ -152,7 +152,7 @@
                     <span>></span>
                 </li>
                 <li>
-                    <p>Gỏi hàng </p>
+                    <p>Giỏ hàng </p>
                 </li>
             </ul>
         </div>
@@ -164,7 +164,7 @@
                     <table>
                         <thead>
                             <tr>
-                                <th><input type="checkbox" checked></th>
+<th><input type="checkbox" checked></th>
                                 <th>Sản phẩm</th>
                                 <th>Đơn giá</th>
                                 <th>Số lượng</th>
@@ -213,7 +213,7 @@
                                 </td>
                                 <td>
                                     <div class="quantity-control">
-                                        <button class="quantity-button btn-minus">-</button>
+<button class="quantity-button btn-minus">-</button>
                                         <input type="number" class="quantity-input qty-input" value="1" min="1">
                                         <button class="quantity-button btn-plus">+</button>
                                     </div>
@@ -274,7 +274,7 @@
                 </ul>
             </div>
                <div class="footer__column">
-                <h3 class="footer__heading">Stay In Touch</h3>
+<h3 class="footer__heading">Stay In Touch</h3>
                  <div class="footer__social">
                     <a href="#!" class="footer__social-btn">
                         <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -289,7 +289,7 @@
                         </svg>
                         </a>
                     <a href="#!" class="footer__social-btn"><svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 1.39394C0 0.989891 0.146401 0.656558 0.439189 0.393939C0.731978 0.131309 1.11262 0 1.58108 0C2.04119 0 2.41344 0.129285 2.69788 0.387879C2.99066 0.654545 3.13707 1.00201 3.13707 1.4303C3.13707 1.81818 2.99486 2.14141 2.71042 2.4C2.41764 2.66667 2.03282 2.8 1.55598 2.8H1.54344C1.08333 2.8 0.711072 2.66667 0.426641 2.4C0.142209 2.13333 0 1.79798 0 1.39394ZM0.163127 12V3.90303H2.94884V12H0.163127ZM4.49228 12H7.27799V7.47879C7.27799 7.19595 7.31146 6.97777 7.37838 6.82424C7.49549 6.54949 7.67326 6.31716 7.91168 6.12727C8.1501 5.93737 8.44916 5.84242 8.80888 5.84242C9.74582 5.84242 10.2143 6.45252 10.2143 7.67273V12H13V7.35758C13 6.16161 12.7072 5.25455 12.1216 4.63636C11.536 4.01818 10.7622 3.70909 9.80019 3.70909C8.72104 3.70909 7.88031 4.15758 7.27799 5.05455V5.07879H7.26544L7.27799 5.05455V3.90303H4.49228C4.509 4.16161 4.51737 4.96565 4.51737 6.31515C4.51737 7.66464 4.509 9.55959 4.49228 12Z"
+<path d="M0 1.39394C0 0.989891 0.146401 0.656558 0.439189 0.393939C0.731978 0.131309 1.11262 0 1.58108 0C2.04119 0 2.41344 0.129285 2.69788 0.387879C2.99066 0.654545 3.13707 1.00201 3.13707 1.4303C3.13707 1.81818 2.99486 2.14141 2.71042 2.4C2.41764 2.66667 2.03282 2.8 1.55598 2.8H1.54344C1.08333 2.8 0.711072 2.66667 0.426641 2.4C0.142209 2.13333 0 1.79798 0 1.39394ZM0.163127 12V3.90303H2.94884V12H0.163127ZM4.49228 12H7.27799V7.47879C7.27799 7.19595 7.31146 6.97777 7.37838 6.82424C7.49549 6.54949 7.67326 6.31716 7.91168 6.12727C8.1501 5.93737 8.44916 5.84242 8.80888 5.84242C9.74582 5.84242 10.2143 6.45252 10.2143 7.67273V12H13V7.35758C13 6.16161 12.7072 5.25455 12.1216 4.63636C11.536 4.01818 10.7622 3.70909 9.80019 3.70909C8.72104 3.70909 7.88031 4.15758 7.27799 5.05455V5.07879H7.26544L7.27799 5.05455V3.90303H4.49228C4.509 4.16161 4.51737 4.96565 4.51737 6.31515C4.51737 7.66464 4.509 9.55959 4.49228 12Z"
                          fill="currentColor"/>
                         </svg>
                         </a>
@@ -312,7 +312,7 @@
         </div>
      </footer>
 
-<body>
+    <body>
 
 
     <!-- bootstrap 5 cdn -->
@@ -326,16 +326,15 @@
         integrity="sha512-bPh3uwgU5qEMipS/VOmRqynnMXGGSRv+72H/N260MQeXZIK4PG48401Bsby9Nq5P5fz7hy5UGNmC/W1Z51h2GQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="./src/js/apivn.js"></script>
-    <script>
-        function formatVND(value) {
+    <!-- <script>
+          function formatVND(value) {
             return value.toLocaleString('vi-VN') + ' đ';
         }
 
         // Cập nhật thành tiền cho từng sản phẩm + tổng tiền toàn bộ
         function updateCart() {
             let total = 0;
-
-            document.querySelectorAll('.cart-item').forEach(item => {
+document.querySelectorAll('.cart-item').forEach(item => {
                 const checkbox = item.querySelector('input[type="checkbox"]');
                 const qtyInput = item.querySelector('.quantity-input');
                 const unitPriceElement = item.querySelector('.unit-price');
@@ -401,8 +400,9 @@
 
         // Gọi hàm lần đầu khi trang tải xong
         updateCart();
-    </script>
+    </script> -->
     <script src="./src/js/main.js"></script>
+     <script src="./src/js/cart.js"></script>
 </body>
 
 </html>
