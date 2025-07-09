@@ -22,7 +22,6 @@ export function displayProducts(products) {
     `).join('');
 }
 
-
 export function setupProductEvents() {
     document.getElementById('addProductFormCustom')?.addEventListener('submit', async e => {
         e.preventDefault();
@@ -32,10 +31,10 @@ export function setupProductEvents() {
         const file = formData.get('thumbnail');
         let thumbnail_url = '';
 
-        // B1: Upload ảnh nếu có file
+        // ======= B1: Upload ảnh chính (thumbnail) =======
         if (file && file.name) {
             const imageForm = new FormData();
-            imageForm.append('thumbnail', file); // ĐÚNG TÊN với backend
+            imageForm.append('thumbnail', file);
 
             try {
                 const uploadRes = await fetch('http://localhost:3000/upload', {
@@ -51,13 +50,13 @@ export function setupProductEvents() {
                     return;
                 }
             } catch (err) {
-                showToast('Lỗi khi upload ảnh', 'error');
+                showToast('Lỗi khi upload ảnh chính', 'error');
                 console.error(err);
                 return;
             }
         }
 
-        // B2: Gửi dữ liệu sản phẩm
+        // ======= B2: Gửi dữ liệu sản phẩm chính =======
         const productData = {
             product_name: formData.get('productName'),
             current_price: parseFloat(formData.get('price')),
@@ -66,8 +65,11 @@ export function setupProductEvents() {
             description: formData.get('description'),
             category: formData.get('category') || '',
             stock_quantity: parseInt(formData.get('stock')) || 0,
-            thumbnail_url: thumbnail_url
+            thumbnail_url: thumbnail_url,
+            status: 'active' // ⚠️ thêm status mặc định
         };
+
+        let productId = null;
 
         try {
             const res = await fetch('http://localhost:3000/products', {
@@ -77,17 +79,51 @@ export function setupProductEvents() {
             });
 
             const result = await res.json();
-            if (res.ok) {
+            if (res.ok && result.product_id) {
                 showToast('Thêm sản phẩm thành công', 'success');
 
-                productData.id = result.product_id || Date.now();
+                productId = result.product_id;
+
+                // ======= B3: Upload ảnh phụ (nếu có) =======
+                const extraImages = document.getElementById('extraImages');
+                const extraFiles = extraImages?.files;
+
+                if (extraFiles && extraFiles.length > 0) {
+                    const imageForm = new FormData();
+                    for (let i = 0; i < extraFiles.length; i++) {
+                        imageForm.append('images', extraFiles[i]);
+                    }
+                    imageForm.append('product_id', productId); // ⚠️ gửi đúng tên
+
+                    try {
+                        const uploadExtra = await fetch('http://localhost:3000/upload-images', {
+                            method: 'POST',
+                            body: imageForm
+                        });
+
+                        const extraResult = await uploadExtra.json();
+                        if (uploadExtra.ok) {
+                            console.log('Ảnh phụ đã được thêm:', extraResult.inserted);
+                        } else {
+                            showToast('Không thể upload ảnh phụ: ' + extraResult.message, 'warning');
+                        }
+                    } catch (err) {
+                        console.error('Lỗi upload ảnh phụ:', err);
+                        showToast('Lỗi khi upload ảnh phụ', 'error');
+                    }
+                }
+
+                // ======= B4: Cập nhật giao diện sau khi thêm =======
+                productData.product_id = productId;
                 productsData.push(productData);
                 displayProducts(productsData);
 
                 form.reset();
                 document.getElementById('thumbnailPreview').style.display = 'none';
+                document.getElementById('productImagesPreview').style.display = 'none';
+
             } else {
-                showToast('Lỗi: ' + (result.message || 'Không thêm được sản phẩm'), 'error');
+                showToast('Lỗi khi thêm sản phẩm: ' + (result.message || 'Không có product_id trả về'), 'error');
             }
         } catch (err) {
             console.error('Lỗi gửi dữ liệu:', err);
@@ -95,12 +131,31 @@ export function setupProductEvents() {
         }
     });
 
-    // Hiển thị ảnh preview khi chọn ảnh
+    // ======= Preview ảnh chính =======
     document.getElementById('thumbnail')?.addEventListener('change', function (e) {
         const file = e.target.files[0];
         const preview = document.getElementById('thumbnailPreview');
         if (file) {
             preview.src = URL.createObjectURL(file);
+            preview.style.display = 'block';
+        } else {
+            preview.style.display = 'none';
+        }
+    });
+
+    // ======= Preview ảnh phụ =======
+    document.getElementById('extraImages')?.addEventListener('change', function (e) {
+        const files = e.target.files;
+        const preview = document.getElementById('productImagesPreview');
+        if (files && files.length > 0) {
+            preview.innerHTML = '';
+            Array.from(files).forEach(file => {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.style.width = '50px';
+                img.style.margin = '4px';
+                preview.appendChild(img);
+            });
             preview.style.display = 'block';
         } else {
             preview.style.display = 'none';
@@ -114,8 +169,8 @@ async function fetchProducts() {
         const data = await res.json();
 
         if (res.ok) {
-            productsData = data; // cập nhật mảng toàn cục
-            displayProducts(productsData); // render
+            productsData = data;
+            displayProducts(productsData);
         } else {
             showToast('Lỗi khi lấy sản phẩm: ' + (data.message || 'Không rõ'), 'error');
         }
@@ -124,7 +179,8 @@ async function fetchProducts() {
         showToast('Không thể kết nối server', 'error');
     }
 }
+
 document.addEventListener('DOMContentLoaded', () => {
-    fetchProducts();     // ← gọi API và hiển thị sản phẩm khi trang vừa load
-    setupProductEvents(); // ← gắn sự kiện form, upload ảnh, v.v.
+    fetchProducts();
+    setupProductEvents();
 });

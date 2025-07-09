@@ -13,7 +13,9 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client')));
+app.use('/uploads', express.static('uploads'));
 
+// app.use('/uploads', express.static('uploads'));
 // ======= MySQL USERS DB =======
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -119,6 +121,8 @@ app.post('/upload', upload.single('thumbnail'), (req, res) => {
   res.status(200).json({ message: 'Upload thành công', thumbnail_url });
 });
 
+
+
 // 2. Thêm sản phẩm
 app.post('/products', (req, res) => {
   const {
@@ -151,6 +155,29 @@ app.post('/products', (req, res) => {
     });
   });
 });
+// Upload nhiều ảnh và lưu vào bảng product_images
+app.post('/upload-images', upload.array('images', 5), (req, res) => {
+    const { product_id } = req.body;
+    const files = req.files;
+
+    if (!product_id || !files?.length) {
+        return res.status(400).json({ message: 'Thiếu product_id hoặc không có ảnh' });
+    }
+
+    const values = files.map(file => [product_id, `/uploads/${file.filename}`]);
+    const query = 'INSERT INTO product_images (product_id, image_url) VALUES ?';
+
+    productDb.query(query, [values], (err, result) => {
+        if (err) {
+            console.error('Lỗi khi lưu ảnh phụ:', err);
+            return res.status(500).json({ message: 'Lỗi khi lưu ảnh phụ' });
+        }
+
+        res.status(200).json({ inserted: result.affectedRows });
+    });
+});
+
+
 
 // 3. Lấy danh sách sản phẩm
 app.get('/products', (req, res) => {
@@ -179,6 +206,14 @@ app.get('/api/products/:id', (req, res) => {
     } else {
       res.status(404).json({ message: 'Không tìm thấy sản phẩm' });
     }
+  });
+});
+// hiển thị ảnh phụ 
+app.get('/api/images/:productId', (req, res) => {
+  const { productId } = req.params;
+  productDb.query('SELECT * FROM product_images WHERE product_id = ?', [productId], (err, results) => {
+    if (err) return res.status(500).json({ message: 'Lỗi khi lấy ảnh phụ' });
+    res.status(200).json(results);
   });
 });
 
