@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Admin - Quản lý hệ thống</title>
+    <link rel="stylesheet" href="./src/css/admin.css">
+    <link rel="stylesheet" href="./src/css/reset.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-cog"></i> Admin Panel</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a href="#dashboard" onclick="showSection('dashboard')">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="#users" onclick="showSection('users')">
+                        <i class="fas fa-users"></i> Quản lý người dùng
+                    </a>
+                </li>
+                <li>
+                    <a href="#products" onclick="showSection('products')">
+                        <i class="fas fa-box"></i> Quản lý sản phẩm
+                    </a>
+                </li>
+                <li>
+                    <a href="#add-product-section" onclick="showSection('add-product-section')">
+                        <i class="fas fa-plus"></i> Thêm sản phẩm
+                    </a>
+                </li>
+                <li>
+                    <a href="#orders" onclick="showSection('orders')">
+                        <i class="fas fa-shopping-cart"></i> Quản lý đơn hàng
+                    </a>
+                </li>
+                <li>
+                    <a href="#analytics" onclick="showSection('analytics')">
+                        <i class="fas fa-chart-bar"></i> Thống kê
+                    </a>
+                </li>
+                <li>
+                    <a href="#settings" onclick="showSection('settings')">
+                        <i class="fas fa-cog"></i> Cài đặt
+                    </a>
+                </li>
+           
+               
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="header-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 id="page-title">Dashboard</h1>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Tìm kiếm...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="user-profile" onclick="toggleUserMenu()">
+                        <img src="./src/img/logouth.png" alt="User">
+                        <span id="user-display-name">Admin</span>
+                        <i class="fas fa-chevron-down"></i>
+                        <div class="user-menu" id="userMenu">
+                            <a href="#" onclick="logout()">
+                                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="section active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-users">0</h3>
+                                <p>Tổng người dùng</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-products">0</h3>
+                                <p>Tổng sản phẩm</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-orders">0</h3>
+                                <p>Tổng đơn hàng</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3 id="total-revenue">0đ</h3>
+                                <p>Doanh thu</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="chart-container">
+                            <h3>Biểu đồ doanh thu</h3>
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                        <div class="recent-activity">
+                            <h3>Hoạt động gần đây</h3>
+                            <div id="recent-activities">
+                                <!-- Activities will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Users Section -->
+                <section id="users" class="section">
+                    <div class="section-header">
+                        <h2>Quản lý người dùng</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên</th>
+                                    <th>Email</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <!-- Users data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Products Section -->
+                <section id="products" class="section">
+                    <div class="section-header">
+                        <h2>Quản lý sản phẩm</h2>
+                        
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Danh mục</th>
+                                    <th>Tồn kho</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="products-table-body">
+                                <!-- Products data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Orders Section -->
+                <section id="orders" class="section">
+                    <div class="section-header">
+                        <h2>Quản lý đơn hàng</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã đơn hàng</th>
+                                    <th>Khách hàng</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày đặt</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-table-body">
+                                <!-- Orders data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Analytics Section -->
+                <section id="analytics" class="section">
+                    <div class="analytics-grid">
+                        <div class="chart-container">
+                            <h3>Thống kê người dùng</h3>
+                            <canvas id="usersChart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>Thống kê sản phẩm</h3>
+                            <canvas id="productsChart"></canvas>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Settings Section -->
+                <section id="settings" class="section">
+                    <div class="settings-container">
+                        <h2>Cài đặt hệ thống</h2>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>Tên website</label>
+                                <input type="text" value="Admin Panel" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Email liên hệ</label>
+                                <input type="email" value="admin@example.com" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="tel" value="0123456789" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Lưu cài đặt</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Add Product Section -->
+                <section id="add-product-section" class="section" style="display:none">
+                   <div class="section-header">
+                    <h2>Thêm sản phẩm</h2>
+                </div>
+                    <form id="addProductFormCustom" class="add-product-grid">
+                      <div class="left-col">
+                        <div>
+                          <label for="productName">Tên sản phẩm:</label>
+                          <input type="text" id="productName" name="productName" required>
+                        </div>
+                        <div>
+                          <label for="currentPrice">Giá bán:</label>
+                          <input type="number" id="currentPrice" name="currentPrice" required>
+                        </div>
+                        <div>
+                          <label for="material">Chất liệu:</label>
+                          <input type="text" id="material" name="material">
+                        </div>
+                        <div>
+                          <label for="discountPrice">Giá giảm:</label>
+                          <input type="number" id="discountPrice" name="discountPrice">
+                        </div>
+                        <div>
+                          <label for="description">Mô tả:</label>
+                          <textarea id="description" name="description"></textarea>
+                        </div>
+                      </div>
+                      <div class="right-col">
+                        <div class="image-upload">
+                          <label for="thumbnail" class="image-label">Ảnh Đại Diện</label>
+                          <input type="file" id="thumbnail" name="thumbnail" accept="image/*" required>
+                        </div>
+                        <div class="image-upload">
+                          <label for="productImages" class="image-label">Ảnh Sản Phẩm</label>
+                          <input type="file" id="productImages" name="productImages" accept="image/*" multiple>
+                        </div>
+                      </div>
+                      <button type="submit" class="full-width-btn">Thêm sản phẩm</button>
+                    </form>
+                    <img id="thumbnailPreview" class="image-preview" style="display:none;">
+                    <img id="productImagesPreview" class="image-preview" style="display:none;">
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add User Modal -->
+    <div id="addUserModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Thêm người dùng mới</h3>
+                <span class="close" onclick="closeModal('addUserModal')">&times;</span>
+            </div>
+            <form id="addUserForm">
+                <div class="form-group">
+                    <label>Tên đầy đủ</label>
+                    <input type="text" name="fullName" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" name="password" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Vai trò</label>
+                    <select name="role" class="form-control">
+                        <option value="user">Người dùng</option>
+                        <option value="admin">Admin</option>
+                        <option value="moderator">Moderator</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('addUserModal')">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Thêm người dùng</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <!-- <div id="addProductModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Thêm sản phẩm mới</h3>
+                <span class="close" onclick="closeModal('addProductModal')">&times;</span>
+            </div>
+            <form id="addProductForm">
+                <div class="form-group">
+                    <label>Tên sản phẩm</label>
+                    <input type="text" name="productName" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Mô tả</label>
+                    <textarea name="description" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Giá</label>
+                    <input type="number" name="price" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Danh mục</label>
+                    <select name="category" class="form-control">
+                        <option value="electronics">Điện tử</option>
+                        <option value="clothing">Quần áo</option>
+                        <option value="books">Sách</option>
+                        <option value="home">Nhà cửa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Số lượng tồn kho</label>
+                    <input type="number" name="stock" required class="form-control">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('addProductModal')">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+                </div>
+            </form>
+        </div>
+    </div> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="./src/js/adminmain.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (document.getElementById('description')) {
+        ClassicEditor.create(document.getElementById('description'));
+      }
+    });
+    </script>
+</body>
+</html>
