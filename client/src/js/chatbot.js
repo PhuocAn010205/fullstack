@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   container.innerHTML = `
     <div class="chat-container" id="chatWindow">
       <div class="chat-header">
-        💬 Tư vấn UTHCare
+        <i class="fa-solid fa-circle" style="color: #00ff2a;"></i> Tư vấn UTHCare
         <span class="chat-close" onclick="closeChatbot()">✖</span>
       </div>
       <div class="chat-body" id="chatBody">

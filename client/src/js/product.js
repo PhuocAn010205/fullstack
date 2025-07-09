@@ -43,4 +43,10 @@ qtyInput.addEventListener('change',()=> {
     }
     updateDecrease();
 });
-
+function toggleAccordion() {
+  const body = document.querySelector('.accordion-body');
+  const arrow = document.querySelector('.arrow');
+  const isVisible = body.style.display === 'block';
+  body.style.display = isVisible ? 'none' : 'block';
+  arrow.classList.toggle('rotate', !isVisible);
+}
