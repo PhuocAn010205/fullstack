@@ -1,0 +1,65 @@
+[
+  {
+    "keyword": ["bao cao su", "sagami", "okamoto", "durex", "safefit"],
+    "name": "Sagami Love Me Gold",
+    "brand": "SAGAMI",
+    "origin": "Nhật Bản",
+    "description": "Siêu mỏng, không mùi, trơn – hỗ trợ phòng tránh thai và HIV"
+  },
+  {
+    "keyword": ["hạ sốt", "giảm đau", "hapacol", "panadol", "bye bye fever", "acemol"],
+    "name": "Panadol viên sủi",
+    "brand": "GSK OTC",
+    "origin": "Việt Nam",
+    "description": "Dạng viên sủi – hỗ trợ hạ sốt, giảm đau nhanh"
+  },
+  {
+    "keyword": ["viêm da", "cơ địa", "atopiclair", "sẹo", "hiruscar", "megaduo"],
+    "name": "Atopiclair Lotion",
+    "brand": "Atopiclair",
+    "origin": "Đức",
+    "description": "Hỗ trợ bảo vệ da viêm cơ địa, viêm da tiếp xúc"
+  },
+  {
+    "keyword": ["mụn", "thâm", "sáng da", "acnes", "thorakao"],
+    "name": "Kem nghệ Thorakao",
+    "brand": "Thorakao",
+    "origin": "Hàn Quốc",
+    "description": "Làm sáng da, giảm mụn, hỗ trợ liền da"
+  },
+  {
+    "keyword": ["khử mùi", "lăn nách", "etiaxil", "refre", "enchantuer", "trapha"],
+    "name": "Etiaxil Sensitive",
+    "brand": "ETIAXIL",
+    "origin": "Đan Mạch",
+    "description": "Dành cho da nhạy cảm – ngăn mồ hôi và khử mùi hiệu quả"
+  },
+  {
+    "keyword": ["kem dưỡng", "nivea", "vaseline", "hatomugi", "dưỡng ẩm"],
+    "name": "Kem dưỡng NIVEA Soft",
+    "brand": "NIVEA",
+    "origin": "Đức",
+    "description": "Cấp ẩm nhẹ nhàng, phù hợp mọi loại da"
+  },
+  {
+    "keyword": ["thuốc nhỏ mắt", "mỏi mắt", "khô mắt", "osla", "vrohto", "avisla"],
+    "name": "Thuốc nhỏ mắt Osla",
+    "brand": "Merap",
+    "origin": "Việt Nam",
+    "description": "Giảm mỏi mắt, khô mắt, phòng ngừa các bệnh về mắt"
+  },
+  {
+    "keyword": ["tiêu hóa", "đầy bụng", "trào ngược", "neopeptine", "xitrina", "bioflora"],
+    "name": "Dung dịch Neopeptine F",
+    "brand": "Neopeptine",
+    "origin": "Pháp",
+    "description": "Hỗ trợ tiêu hóa, giảm đầy hơi, khó tiêu"
+  },
+  {
+    "keyword": ["dị ứng", "viêm mũi", "mày đay", "cetirizin"],
+    "name": "Viên Cetirizin 10mg",
+    "brand": "Domesco",
+    "origin": "Nga",
+    "description": "Điều trị viêm mũi dị ứng, mề đay, ngứa da"
+  }
+]
