@@ -10,6 +10,20 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MySQL",
+            "name": "cart_items",
+            "database": "cart_items",
+            "username": "admin",
+            "password": "01022005an"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
             "database": "user_tables",
             "username": "admin",
             "password": "01022005an",
@@ -24,9 +38,23 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MySQL",
-            "name": "addproduct ",
+            "name": "addproduct",
             "username": "admin",
-            "database": "addproduct ",
+            "database": "addproduct",
+            "password": "01022005an"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "ecommerce_db",
+            "database": "ecommerce_db",
+            "username": "admin",
             "password": "01022005an"
         }
     ]

@@ -17,7 +17,9 @@ async function loadCategoryProducts() {
     if (!res.ok) throw new Error('Không thể tải sản phẩm');
 
     const products = await res.json();
-    const filtered = products.filter(p => p.category === category);
+   const filtered = products.filter(p =>
+   p.category?.trim().toLowerCase() === category.trim().toLowerCase()
+);
 
     if (filtered.length === 0) {
       container.innerHTML = '<p>Không có sản phẩm nào trong danh mục này.</p>';

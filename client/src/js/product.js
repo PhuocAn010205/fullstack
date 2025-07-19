@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </div>
         </div>
       </div>
+      
     `;
 
     // ✅ Sau khi render HTML xong, gắn sự kiện click vào ảnh nhỏ

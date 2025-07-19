@@ -372,7 +372,7 @@ main {
   align-items: center;
   text-align: center;
   position: relative;
-  min-width: 180px;
+  width: 180px;
 }
 
 .product__tag {
@@ -493,8 +493,8 @@ button.disabled {
 }
 .footer__row {
     display:grid;
-    column-gap: 78px;
-    grid-template-columns: 1fr 0.4fr 0.4fr 1fr ;
+    column-gap: 50px;
+    grid-template-columns: 1fr 1fr 1fr; ;
 }
 .footer__desc {
     margin-top: 20px;
@@ -524,9 +524,23 @@ button.disabled {
     line-height: 1.85; /* 185.714% */
     white-space: nowrap;/*Giong cho chu dai khong bi be xuong hang nua*/
 }
-.footer__link:hover {
+.footer__link:hover  {
     color: pink;
     text-decoration: underline;/*them gach chan duoi chu*/
+   
+}
+.footer__link:hover .item-content{
+   display: block;
+}
+.item-content{
+  display: none;
+  position: absolute;
+    width: 500px;
+    top: -45px;
+    left: 212px;
+    background: #cccccc4a;
+    padding: 10px 15px;
+    border-radius: 10px;
 }
 .footer__social {
     display: flex;

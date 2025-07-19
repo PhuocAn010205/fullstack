@@ -107,6 +107,7 @@ if (loginForm && !inpUserName && !inpConfirmPwd) {
 
       if (res.ok) {
         localStorage.setItem("username", data.username);
+        localStorage.setItem("user_id", data.user_id);
         setTimeout(() => {
           window.location.href = "home.html";
         }, 1500);
